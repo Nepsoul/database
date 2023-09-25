@@ -4,7 +4,7 @@ CREATE TABLE blogs (
     title text NOT NULL,
     url text NOT NULL,
     author text NOT NULL,
-    likes integer NULL
+    likes int default 0
    );
 
    -- select the blog table
