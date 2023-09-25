@@ -1,4 +1,4 @@
-GET http://localhost:3003/api/blogs
+GET http://localhost:3003/api/blogs/3
 
 ###
 POST http://localhost:3003/api/blogs
