@@ -54,11 +54,17 @@ app.get("/api/blogs", async (req, res) => {
 
 app.post("/api/blogs", async (req, res) => {
   // console.log(req.body);
+
   const blog = await Blog.create(req.body);
   console.log(blog);
   res.json(blog);
 });
 
+app.delete("/api/blogs/:id", async (req, res) => {
+  // const id = req.params.id;
+  const blog = await Blog.destroy({ where: { id: req.params.id } }); //sql query
+  res.json(blog);
+});
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

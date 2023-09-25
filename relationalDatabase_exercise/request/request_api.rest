@@ -9,5 +9,7 @@ Content-Type: application/json
     "author": "sequal",
     "url": "http://sql.com"
     
-
 }
+
+###
+DELETE  http://localhost:3003/api/blogs/3
