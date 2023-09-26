@@ -1,10 +1,10 @@
 require("dotenv").config();
 // const { Sequelize, QueryTypes } = require('sequelize')
-const { Sequelize, Model, DataTypes, JSON } = require("sequelize");
+const { Sequelize, Model, DataTypes } = require("sequelize");
 const express = require("express");
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); //json parser
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
@@ -55,8 +55,12 @@ app.get("/api/notes", async (req, res) => {
 
 app.post("/api/notes", async (req, res) => {
   console.log(req.body);
-  const note = await Note.create(req.body);
-  res.json(note);
+  try {
+    const note = await Note.create(req.body);
+    res.json(note);
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
 });
 
 app.get("/api/notes/:id", async (req, res) => {
@@ -82,6 +86,13 @@ app.put("/api/notes/:id", async (req, res) => {
   } else {
     res.status(404).end();
   }
+});
+
+app.delete("/api/notes/:id", async (req, res) => {
+  //sequalize method using sql query, converting into sql query
+  // in toDelete variable, instead of deleted note id, it gives number of delete note i.e. 1
+  const toDelete = await Note.destroy({ where: { id: req.params.id } });
+  res.json(toDelete);
 });
 
 const PORT = process.env.PORT || 3001;

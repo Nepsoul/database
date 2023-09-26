@@ -10,9 +10,12 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3001/api/notes/2
+PUT http://localhost:3001/api/notes/3
 Content-Type: application/json
 
 {
     "important": false
 }
+
+###
+DELETE http://localhost:3001/api/notes/4
