@@ -56,9 +56,15 @@ app.delete("/:id", noteFinder, async (req, res) => {
     if (req.note) {
       await req.note.destroy();
     }
-    res.status(204).json({ message: "note deleted successfully" }).end();
+    res
+      .status(202) // to show delete message 202 status code, 204 only delete
+      .json({ message: `note with id "${req.note.id}" deleted successfully` })
+      .end();
   } catch (err) {
-    res.status(500).send("error occured while deleting the note").end();
+    res
+      .status(500)
+      .json({ message: "error occured while deleting the note" })
+      .end();
   }
 });
 
