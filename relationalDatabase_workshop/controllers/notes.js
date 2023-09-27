@@ -1,5 +1,5 @@
 const app = require("express").Router();
-const { Note } = require("../models/index");
+const { Note, User } = require("../models/index");
 
 const noteFinder = async (req, res, next) => {
   req.note = await Note.findByPk(req.params.id);
@@ -17,7 +17,8 @@ app.get("/", async (req, res) => {
 app.post("/", async (req, res) => {
   console.log(req.body);
   try {
-    const note = await Note.create(req.body);
+    const user = await User.findOne();
+    const note = await Note.create({ ...req.body, userId: user.id }); //added foreign key, i.e. user id to show creator of post
     res.json(note);
   } catch (error) {
     return res.status(400).json({ error });
