@@ -15,3 +15,6 @@ insert into notes (content, important, time) values ('MongoDB is webscale', now(
 
 -- to delete note
 drop table notes
+
+-- to delete one specific note form table
+delete from notes where id = 2
