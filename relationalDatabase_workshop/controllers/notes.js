@@ -28,12 +28,22 @@ const tokenExtractor = (req, res, next) => {
 app.get("/", async (req, res) => {
   // const notes = await sequelize.query("SELECT * FROM notes", { type: QueryTypes.SELECT })
 
-  let important = {
-    [Op.in]: [true, false],
-  };
+  const where = {};
+
   if (req.query.important) {
-    important = req.query.important === "true";
+    where.important = req.query.important === "true";
   }
+
+  if (req.query.search) {
+    where.content = { [Op.substring]: req.query.search };
+  }
+
+  // let important = {
+  //   [Op.in]: [true, false],
+  // };
+  // if (req.query.important) {
+  //   important = req.query.important === "true";
+  // }
   const notes = await Note.findAll({
     attributes: {
       exclude: ["userId"],
@@ -42,12 +52,13 @@ app.get("/", async (req, res) => {
       model: User,
       attributes: ["name"],
     },
-    where: {
-      important,
-      content: {
-        [Op.substring]: req.query.search ? req.query.search : "",
-      },
-    },
+    where,
+    // where: {
+    //   important,
+    //   content: {
+    //     [Op.substring]: req.query.search ? req.query.search : "",
+    //   },
+    // },
   });
   // console.log(JSON.stringify(notes))
 
