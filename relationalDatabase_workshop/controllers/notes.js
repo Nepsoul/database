@@ -1,8 +1,26 @@
 const app = require("express").Router();
+const jwt = require("jsonwebtoken");
+const { SECRET } = require("../utils/config");
 const { Note, User } = require("../models/index");
 
 const noteFinder = async (req, res, next) => {
   req.note = await Note.findByPk(req.params.id);
+  next();
+};
+
+//middleware
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get("authorization");
+
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    try {
+      req.decodedToken = jwt.verify(authorization.substring(7), SECRET);
+    } catch {
+      return res.status(401).json({ error: "invalid token" });
+    }
+  } else {
+    return res.status(401).json({ error: "token missing" });
+  }
   next();
 };
 
@@ -14,11 +32,16 @@ app.get("/", async (req, res) => {
   res.json(notes);
 });
 
-app.post("/", async (req, res) => {
+app.post("/", tokenExtractor, async (req, res) => {
   console.log(req.body);
   try {
-    const user = await User.findOne();
-    const note = await Note.create({ ...req.body, userId: user.id }); //added foreign key, i.e. user id to show creator of post
+    // const user = await User.findOne(); //it gives first user like find method
+    const user = await User.findByPk(req.decodedToken.id);
+    const note = await Note.create({
+      ...req.body,
+      userId: user.id,
+      date: new Date(),
+    }); //added foreign key, i.e. user id to show creator of post
     res.json(note);
   } catch (error) {
     return res.status(400).json({ error });
