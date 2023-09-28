@@ -26,7 +26,15 @@ const tokenExtractor = (req, res, next) => {
 
 app.get("/", async (req, res) => {
   //   const notes = await sequelize.query("SELECT * FROM notes", { type: QueryTypes.SELECT })
-  const notes = await Note.findAll();
+  const notes = await Note.findAll({
+    attributes: {
+      exclude: ["userId"],
+    },
+    include: {
+      model: User,
+      attributes: ["name"],
+    },
+  });
   // console.log(JSON.stringify(notes))
 
   res.json(notes);
