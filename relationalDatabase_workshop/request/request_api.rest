@@ -6,8 +6,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNxbCIsImlkIjo2LCJpYXQiOjE2OTU4NzU2MjZ9.EYQ-G9McFf6vZ_0IPHyws_hDnexFfRtzBf79jK6Tdv0
 
 {
-    "content": "new post using token authentication",
-    "important": true
+    "content": "new post using token authentication2",
+    "important": false
 }
 
 ###
