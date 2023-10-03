@@ -11,4 +11,15 @@ const sequelize = new Sequelize(DATABASE_URL, {
   },
 });
 
-module.exports = { sequelize };
+// to secure successful database connection before actual startup
+const connectToDatabase = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("connect to database");
+  } catch (err) {
+    console.log("failed to connect to database");
+    return process.exit(1);
+  }
+  return null;
+};
+module.exports = { sequelize, connectToDatabase };
