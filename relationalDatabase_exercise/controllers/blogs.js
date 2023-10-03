@@ -21,11 +21,9 @@ app.get("/:id", async (req, res) => {
 });
 
 app.post("/", async (req, res) => {
-  // console.log(req.body);
-
+  console.log(req.body);
   try {
     const blog = await Blog.create(req.body);
-    console.log(blog);
     res.json(blog);
   } catch (error) {
     return res.status(400).json({ error }).end();
@@ -46,6 +44,17 @@ app.delete("/:id", async (req, res) => {
     res.status(204).json({ message: "blog deleted successfully" }).end();
   } catch (error) {
     res.status(500).send("error occured while deleting the blog").end();
+  }
+});
+
+app.put("/:id", async (req, res) => {
+  const blog = await Blog.findByPk(req.params.id);
+  if (blog) {
+    blog.likes = req.body.likes;
+    await blog.save();
+    res.json(blog);
+  } else {
+    res.status(404).end();
   }
 });
 
