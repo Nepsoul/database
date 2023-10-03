@@ -1,6 +1,6 @@
 const app = require("express").Router();
 
-const Blog = require("../models/blog");
+const { Blog } = require("../models/index");
 
 app.get("/", async (req, res) => {
   const blogs = await Blog.findAll();
