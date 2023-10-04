@@ -5,20 +5,20 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "checking like update blog",
+   
     "author": "sequel",
     "url": "http://sql.com",
-    "likes": 5
+    "likes": 7
     
 }
 
 ###
-DELETE  http://localhost:3003/api/blogs/3
+DELETE  http://localhost:3003/api/blogs/6
 
 ###
 PUT http://localhost:3003/api/blogs/5
 Content-Type: application/json
 
 {
-    "likes": 2
+    "likes": 
 }
