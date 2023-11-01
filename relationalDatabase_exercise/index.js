@@ -3,6 +3,7 @@ const app = express();
 const blogRouter = require("./controllers/blogs");
 const { PORT } = require("./util/config");
 const { connectToDatabase } = require("./util/db");
+require("express-async-errors"); //middleware of use eliminate try/catch block(note: by eliminating try/catch block it does not hanlde errors)
 
 app.use(express.json()); //json parser, to parse req.body's data
 
@@ -28,6 +29,7 @@ const errorHandler = (error, req, res, next) => {
   // if (error.name === "Error") {
   //   return res.status(400).send({ message: "invalid integer" });
   // }
+
   if (error.name === "Validation error") {
     return res.status(400).send({ error: error.message });
   }
