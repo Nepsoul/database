@@ -7,9 +7,16 @@ CREATE TABLE blogs (
     likes int default 0
    );
 
-   -- select the blog table
+-- select the blog table
    select * from blogs
 
-      -- data insert into blog table
+-- data insert into blog table
 insert into blogs (title, url, author, likes) values ('Relational databases rule the world', 'https://himalayan.com', 'ram', 3);
 insert into blogs (title, url, author, likes) values ('MongoDB is webscale', 'http://himalayan.com', 'sita', 8);
+
+-- to delete blog
+drop table blogs
+
+--to alter the data type
+ALTER TABLE blogs
+ALTER COLUMN likes TYPE INTEGER USING likes::integer;
