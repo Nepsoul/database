@@ -28,13 +28,13 @@ app.get("/:id", blogFinder, async (req, res, next) => {
 
 app.post("/", async (req, res, next) => {
   console.log(req.body);
-  // try {
-  const blog = await Blog.create(req.body);
-  res.json(blog);
-  // } catch (error) {
-  //   next(error);
-  //   //   // return res.status(400).json({ error }).end();
-  // }
+  try {
+    const blog = await Blog.create(req.body);
+    res.json(blog);
+  } catch (error) {
+    next(error);
+    // return res.status(400).json({ error }).end();
+  }
 });
 
 app.delete("/:id", blogFinder, async (req, res) => {
@@ -43,31 +43,31 @@ app.delete("/:id", blogFinder, async (req, res) => {
   // res.json(blog);
 
   // const id = req.params.id;
-  // try {
-  // const result = await Blog.findByPk(id); //sequalize method
-  if (req.blog) {
-    await req.blog.destroy();
+  try {
+    // const result = await Blog.findByPk(id); //sequalize method
+    if (req.blog) {
+      await req.blog.destroy();
+    }
+    res.status(204).end();
+  } catch (error) {
+    next(error);
+    //   // res.status(500).send("error occured while deleting the blog").end();
   }
-  res.status(204).end();
-  // } catch (error) {
-  //   next(error);
-  //   //   // res.status(500).send("error occured while deleting the blog").end();
-  // }
 });
 
 app.put("/:id", blogFinder, async (req, res, next) => {
   // const blog = await Blog.findByPk(req.params.id);
-  // try {
-  if (req.blog) {
-    req.blog.likes = req.body.likes;
-    await req.blog.save();
-    res.json(req.blog);
-  } else {
-    res.status(404).end();
+  try {
+    if (req.blog) {
+      req.blog.likes = req.body.likes;
+      await req.blog.save();
+      res.json(req.blog);
+    } else {
+      res.status(404).end();
+    }
+  } catch (error) {
+    next(error);
   }
-  // } catch (error) {
-  //   next(error);
-  // }
 });
 
 module.exports = app;

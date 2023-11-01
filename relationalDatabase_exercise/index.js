@@ -3,7 +3,7 @@ const app = express();
 const blogRouter = require("./controllers/blogs");
 const { PORT } = require("./util/config");
 const { connectToDatabase } = require("./util/db");
-require("express-async-errors"); //middleware of use eliminate try/catch block(note: by eliminating try/catch block it does not hanlde errors)
+// require("express-async-errors"); //middleware of use eliminate try/catch block(note: by eliminating try/catch block it does not hanlde errors)
 
 app.use(express.json()); //json parser, to parse req.body's data
 
