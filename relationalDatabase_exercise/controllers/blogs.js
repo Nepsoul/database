@@ -54,7 +54,7 @@ app.delete("/:id", blogFinder, async (req, res) => {
   }
 });
 
-app.put("/:id", blogFinder, async (req, res) => {
+app.put("/:id", blogFinder, async (req, res, next) => {
   // const blog = await Blog.findByPk(req.params.id);
   try {
     if (req.blog) {

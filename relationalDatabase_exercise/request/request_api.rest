@@ -6,6 +6,7 @@ Content-Type: application/json
 
 {
    
+    "title":"data added for test id",
     "author": "sequel",
     "url": "http://sql.com",
     "likes": 7
@@ -16,9 +17,9 @@ Content-Type: application/json
 DELETE  http://localhost:3003/api/blogs/6
 
 ###
-PUT http://localhost:3003/api/blogs/5
+PUT http://localhost:3003/api/blogs/7
 Content-Type: application/json
 
 {
-    "likes": 
+    "likes": 0.5
 }
