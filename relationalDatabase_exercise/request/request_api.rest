@@ -7,14 +7,14 @@ Content-Type: application/json
 {
    
     "title":"use of express-async-errors",
-    
+    "author":"sequel",
     "url": "http://sql.com",
-    "likes": 2
+    "likes": 5
     
 }
 
 ###
-DELETE  http://localhost:3003/api/blogs/27
+DELETE  http://localhost:3003/api/blogs/3
 
 ###
 PUT http://localhost:3003/api/blogs/27
@@ -22,4 +22,26 @@ Content-Type: application/json
 
 {
     "likes": 3
+}
+
+###
+GET http://localhost:3003/api/users/
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username":"datatime",
+    "name": "sql"
+    
+}
+
+###
+PUT http://localhost:3003/api/users/datatime
+Content-Type: application/json
+
+{
+    "username":"szl"
+
 }

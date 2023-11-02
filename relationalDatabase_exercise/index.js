@@ -5,9 +5,12 @@ const { PORT } = require("./util/config");
 const { connectToDatabase } = require("./util/db");
 // require("express-async-errors"); //middleware of use eliminate try/catch block(note: by eliminating try/catch block it does not hanlde errors)
 
+const userRouter = require("./controllers/users");
+
 app.use(express.json()); //json parser, to parse req.body's data
 
 app.use("/api/blogs", blogRouter);
+app.use("/api/users", userRouter);
 
 const noHandler = (req, res) => {
   res.status(404).send("<h1>No routes found for this request</h1>");

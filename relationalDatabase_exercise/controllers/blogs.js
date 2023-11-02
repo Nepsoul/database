@@ -51,7 +51,7 @@ app.delete("/:id", blogFinder, async (req, res) => {
     res.status(204).end();
   } catch (error) {
     next(error);
-    //   // res.status(500).send("error occured while deleting the blog").end();
+    // res.status(500).send("error occured while deleting the blog").end();
   }
 });
 
