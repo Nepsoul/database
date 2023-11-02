@@ -19,13 +19,16 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    passwordHash: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
   },
-
   {
     sequelize,
-    usderscored: true,
+    underscored: true,
     timestamps: true, //enable timestamps(createdAt and updatedAt)
     modelName: "user",
   }
