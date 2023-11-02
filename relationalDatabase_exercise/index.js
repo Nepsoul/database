@@ -29,13 +29,11 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === "SyntaxError") {
     return res.status(400).send(error.message);
   }
-  // if (error.name === "Error") {
-  //   return res.status(400).send({ message: "invalid integer" });
-  // }
 
   if (error.name === "Validation error") {
     return res.status(400).send({ error: error.message });
   }
+
   next(error);
 };
 app.use(noHandler);

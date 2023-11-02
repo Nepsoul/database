@@ -13,7 +13,7 @@ userRouter.get("/", async (req, res) => {
   }
 });
 
-userRouter.post("/", async (req, res) => {
+userRouter.post("/", async (req, res, next) => {
   try {
     const { username, name, password } = req.body;
 
@@ -24,7 +24,8 @@ userRouter.post("/", async (req, res) => {
     await user.save();
     res.json(user);
   } catch (error) {
-    return res.status(400).json({ message: "error" }).end();
+    next(error);
+    // return res.status(400).json({ message: "error" }).end();
   }
 });
 
