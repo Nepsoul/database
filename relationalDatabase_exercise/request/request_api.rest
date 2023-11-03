@@ -32,16 +32,26 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-   "username":"user3",
+   "username":"user3@gmail.com",
    "name":"user3",
    "password":"123"
 }
 
 ###
-PUT http://localhost:3003/api/users/datatime
+PUT http://localhost:3003/api/users/user4@gmail.com
 Content-Type: application/json
 
 {
-    "username":"szl"
+    "username":"user"
+
+}
+
+###
+POST http://localhost:3003/api/login/
+Content-Type: application/json
+
+{
+    "username":"user4@gmail.com",
+    "password":"secret"
 
 }
