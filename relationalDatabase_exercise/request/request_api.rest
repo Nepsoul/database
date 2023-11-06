@@ -3,11 +3,11 @@ GET http://localhost:3003/api/blogs/
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2OTkwMDYzNTd9.Y10ypbaFqZWufezDbiBKr7-5U5NsWragR8J0er-g2Ds
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2OTkyNDk0ODV9.eFYYgJJLM9g-f43XvpgwBsSBjvHJfBfAtsge_WyG25Q
 
 {
    
-    "title":"creating new blog using token",
+    "title":"new blog feat. token",
     "author":"sequel",
     "url": "http://sql.com",
     "likes": 5
@@ -53,6 +53,6 @@ Content-Type: application/json
 
 {
     "username":"user4@gmail.com",
-    "password":"secret"
+    "password":"123"
 
 }
