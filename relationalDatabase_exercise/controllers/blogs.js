@@ -1,10 +1,27 @@
 const app = require("express").Router();
+const jwt = require("jsonwebtoken");
 
-const { Blog } = require("../models/index");
+const { Blog, User } = require("../models/index");
+const { SECRET } = require("../util/config");
 
 //middleware
 const blogFinder = async (req, res, next) => {
   req.blog = await Blog.findByPk(req.params.id);
+  next();
+};
+
+//middleware
+const tokenExtractor = (req, res, next) => {
+  const authorization = req.get("authorization");
+  if (authorization && authorization.toLowerCase().startsWith("bearer ")) {
+    try {
+      req.decodedToken = jwt.verify(authorization.substring(7), SECRET);
+    } catch {
+      return res.status(401).json({ error: "token invalid" });
+    }
+  } else {
+    return res.status(401).json({ error: "token missing" });
+  }
   next();
 };
 
@@ -26,10 +43,16 @@ app.get("/:id", blogFinder, async (req, res, next) => {
   }
 });
 
-app.post("/", async (req, res, next) => {
+app.post("/", tokenExtractor, async (req, res, next) => {
   console.log(req.body);
   try {
-    const blog = await Blog.create(req.body);
+    // const user = await User.findOne();
+    const user = await User.findByPk(req.decodedToken.id);
+    const blog = await Blog.create({
+      ...req.body,
+      userId: user.id,
+      date: new Date(),
+    }); //add foreign key,i.e. userId to show creator of post
     res.json(blog);
   } catch (error) {
     next(error);

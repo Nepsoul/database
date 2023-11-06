@@ -3,10 +3,11 @@ GET http://localhost:3003/api/blogs/
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2OTkwMDYzNTd9.Y10ypbaFqZWufezDbiBKr7-5U5NsWragR8J0er-g2Ds
 
 {
    
-    "title":"use of express-async-errors",
+    "title":"creating new blog using token",
     "author":"sequel",
     "url": "http://sql.com",
     "likes": 5

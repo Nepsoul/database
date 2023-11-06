@@ -2,11 +2,16 @@ const bcrypt = require("bcrypt");
 
 const userRouter = require("express").Router();
 
-const { User } = require("../models");
+const { User, Blog } = require("../models");
 
 userRouter.get("/", async (req, res) => {
   try {
-    const users = await User.findAll();
+    //to show all blogs of user
+    const users = await User.findAll({
+      include: {
+        model: Blog,
+      },
+    });
     res.json(users);
   } catch (error) {
     return res.status(400).json({ message: "error in get api" }).end();
