@@ -1,5 +1,6 @@
 const app = require("express").Router();
 const { Blog, User } = require("../models/index");
+const { Op } = require("sequelize");
 const { blogFinder, tokenExtractor } = require("../util/middleware");
 
 app.get("/", async (req, res) => {
@@ -8,6 +9,11 @@ app.get("/", async (req, res) => {
     include: {
       model: User,
       attributes: ["name"],
+    },
+    where: {
+      title: {
+        [Op.substring]: req.query.search ? req.query.search : "",
+      },
     },
   });
   res.json(blogs);
