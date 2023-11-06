@@ -60,18 +60,21 @@ app.post("/", tokenExtractor, async (req, res, next) => {
   }
 });
 
-app.delete("/:id", blogFinder, async (req, res) => {
+app.delete("/:id", blogFinder, tokenExtractor, async (req, res, next) => {
   //sequalize method using sql query, converting into sql query
   // const blog = await Blog.destroy({ where: { id: req.params.id } });
   // res.json(blog);
 
   // const id = req.params.id;
+
   try {
     // const result = await Blog.findByPk(id); //sequalize method
-    if (req.blog) {
+    if (req.blog.userId !== req.decodedToken.id) {
+      res.status(401).json({ message: "user not authorized to do action" });
+    } else {
       await req.blog.destroy();
+      res.status(204).end();
     }
-    res.status(204).end();
   } catch (error) {
     next(error);
     // res.status(500).send("error occured while deleting the blog").end();

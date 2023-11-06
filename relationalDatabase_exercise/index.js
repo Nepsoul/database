@@ -31,6 +31,9 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === "SyntaxError") {
     return res.status(400).send(error.message);
   }
+  if (error.name === "TypeError") {
+    return res.status(400).send({ error: error.message });
+  }
   if (error.name === "Validation error") {
     return res.status(400).send({ error: error.message });
   }
