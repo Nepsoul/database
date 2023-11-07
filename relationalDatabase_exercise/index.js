@@ -8,12 +8,14 @@ const { noHandler, unKnownPoint, errorHandler } = require("./util/middleware");
 const blogRouter = require("./controllers/blogs");
 const userRouter = require("./controllers/users");
 const longinRouter = require("./controllers/login");
+const authorRouter = require("./controllers/authors");
 
 app.use(express.json()); //json parser, to parse req.body's data
 
 app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
 app.use("/api/login", longinRouter);
+app.use("/api/authors", authorRouter);
 
 app.use(noHandler);
 app.use(unKnownPoint);
