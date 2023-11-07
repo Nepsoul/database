@@ -18,6 +18,12 @@ router.post("/", async (req, res) => {
     return res.status(401).json({ error: "invalid username or password" });
   }
 
+  if (user.disabled) {
+    return res
+      .status(401)
+      .json({ error: "account disabled, please contact admin" });
+  }
+
   const userForToken = {
     username: user.username,
     id: user.id,
