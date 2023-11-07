@@ -8,7 +8,10 @@ app.get("/", async (req, res) => {
 
   if (req.query.search) {
     where.title = {
-      [Op.substring]: req.query.search,
+      [Op.or]: [
+        { [Op.iLike]: req.query.search }, //for case-insensitive search
+        { [Op.substring]: req.query.search },
+      ],
     };
   }
 
