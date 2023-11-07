@@ -3,10 +3,10 @@ GET http://localhost:3001/api/notes
 ###
 POST http://localhost:3001/api/notes
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNxbDIiLCJpZCI6MiwiaWF0IjoxNjk5MzQwOTIzfQ.7VmNzAszzmi67GN_VWLjokx_OfDLtX2076ayvetCuy0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNxbDIiLCJpZCI6MiwiaWF0IjoxNjk5MzQ4NjIyfQ.7QbKVw_V6xpRhpDLST1n0YbrB_oSDHHqo8c3M0B3GvE
 
 {
-    "content": "note5",
+    "content": "note4",
     "important": false
 }
 
@@ -28,8 +28,9 @@ GET http://localhost:3001/api/users
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
-{   "username":"sql2",
-    "name": "sequalize"
+{   "username":"sql3",
+    "name": "sequalize",
+    "disabled":true
 }
 
 ###
@@ -37,6 +38,6 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username":"sql2",
+    "username":"sql3",
     "password":"secret"
 }
