@@ -7,6 +7,13 @@ router.get("/", async (req, res) => {
   const users = await User.findAll({
     include: [
       { model: Note }, //to include all notes, created by user
+      {
+        model: Note,
+        as: "marked_notes",
+        attributes: { exclude: ["userId"] },
+        through: { attributes: [] },
+        include: { model: User, attributes: ["name"] },
+      },
       { model: Team, attributes: ["name", "id"], through: { attributes: [] } }, //to not show membership detail, through table []
     ],
   });
