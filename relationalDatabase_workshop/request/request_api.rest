@@ -28,9 +28,9 @@ GET http://localhost:3001/api/users
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
-{   "username":"sql3",
+{   "username":"sql5",
     "name": "sequalize",
-    "disabled":true
+    "disabled":false
 }
 
 ###
@@ -38,6 +38,15 @@ POST http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-    "username":"sql3",
+    "username":"sql4",
     "password":"secret"
+}
+
+###
+PUT http://localhost:3001/api/users/sql3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNxbDQiLCJpZCI6NiwiaWF0IjoxNjk5NDIxMzc0fQ.Mp3_BBC-NxBb4bJ_l1c-PChbdP_4_rVI-APaOwNnQ5A
+
+{
+    "disabled": false
 }
