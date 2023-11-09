@@ -30,3 +30,8 @@ insert into memberships (user_id, team_id) values (3, 2);
 --to insert data in through table, showing many-to-many relationship betn user and note
 insert into user_notes (user_id, note_id) values (1, 4);
 insert into user_notes (user_id, note_id) values (1, 5);
+
+--for update
+update users
+set disabled=FALSE
+where id=1

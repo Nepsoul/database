@@ -4,14 +4,17 @@ const { tokenExtractor } = require("../utils/middleware");
 const { User, Note, Team } = require("../models");
 
 router.get("/", async (req, res) => {
-  const users = await User.findAll({
+  const users = await User.scope("admin").findAll({
+    // const users = await User.findAll({
     include: [
       { model: Note }, //to include all notes, created by user
 
       { model: Team, attributes: ["name", "id"], through: { attributes: [] } }, //to not show membership detail, through table []
     ],
   });
-  res.json(users);
+
+  let usersWithNotes = await User.with_notes(0); //static method call
+  res.json({ ...users, usersWithNotes });
 });
 
 router.post("/", async (req, res) => {
@@ -46,7 +49,10 @@ router.get("/:id", async (req, res) => {
         joinTableAttributes: [],
       });
     }
-    res.json({ ...user.toJSON(), teams });
+
+    let note_count = await user.number_of_notes(); //instance method call
+
+    res.json({ ...user.toJSON(), teams, note_count });
   } else {
     res.status(404).end();
   }
