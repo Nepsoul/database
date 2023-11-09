@@ -7,13 +7,7 @@ router.get("/", async (req, res) => {
   const users = await User.findAll({
     include: [
       { model: Note }, //to include all notes, created by user
-      {
-        model: Note,
-        as: "marked_notes",
-        attributes: { exclude: ["userId"] },
-        through: { attributes: [] },
-        include: { model: User, attributes: ["name"] },
-      },
+
       { model: Team, attributes: ["name", "id"], through: { attributes: [] } }, //to not show membership detail, through table []
     ],
   });
@@ -31,14 +25,20 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const user = await User.findByPk(req.params.id, {
-    include: { model: Note }, //show all note of user
+    include: [
+      { model: Note }, //show all note of user
+      {
+        model: Note,
+        as: "marked_notes",
+        attributes: { exclude: ["userId"] },
+        through: { attributes: [] },
+        include: { model: User, attributes: ["name"] },
+      },
+      { model: Team, attributes: ["name", "id"], through: { attributes: [] } },
+    ],
   });
   if (user) {
-    res.json({
-      username: user.username,
-      name: user.name,
-      note_count: user.notes.length,
-    });
+    res.json({ user });
   } else {
     res.status(404).end();
   }
