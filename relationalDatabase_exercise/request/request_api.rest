@@ -3,14 +3,15 @@ GET http://localhost:3003/api/blogs/
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyQGdtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE2OTk2MDM2Mjh9.TuWiaw-zuhNKS0XoJbUAojru0Ohn2N0aRHyYbZH3uGo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyQGdtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE2OTk2MDUxNzZ9.HRNJ170Hf8GFUCMA6tFOzMSgOl7VyE8qodl4jeUNJoY
 
 {
    
-    "title":"second blog using user2",
+    "title":"validation check for year",
     "author":"user2",
     "url": "http://sql.com",
-    "likes": 25
+    "likes": 25,
+    "year": 1990
     
 }
 
