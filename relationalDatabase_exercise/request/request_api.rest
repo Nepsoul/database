@@ -3,21 +3,21 @@ GET http://localhost:3003/api/blogs/
 ###
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0QGdtYWlsLmNvbSIsImlkIjo0LCJpYXQiOjE2OTkyNTczNDZ9.YfV96zGcVLjJwZZIMxCu-n9dHvq0gmGb6AgZ4hB14EY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyQGdtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE2OTk2MDM2Mjh9.TuWiaw-zuhNKS0XoJbUAojru0Ohn2N0aRHyYbZH3uGo
 
 {
    
-    "title":"creating new blog",
-    "author":"jami",
+    "title":"second blog using user2",
+    "author":"user2",
     "url": "http://sql.com",
-    "likes": 49
+    "likes": 25
     
 }
 
 ###
 DELETE  http://localhost:3003/api/blogs/6
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXI0QGdtYWlsLmNvbSIsImlkIjo4LCJpYXQiOjE2OTkyNTU2MDh9.0pyRZDrr6Yl-jHaBWsHPEHgkvtaHbXZb4DObaIOdmj4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIyQGdtYWlsLmNvbSIsImlkIjoyLCJpYXQiOjE2OTk2MDM0NTF9.IsuzsaJCfZuPs61AzJPslVubZ90KHwlWQ29lFzIPSpk
 
 ###
 PUT http://localhost:3003/api/blogs/27
@@ -35,8 +35,8 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-   "username":"user4@gmail.com",
-   "name":"user4",
+   "username":"user2@gmail.com",
+   "name":"user2",
    "password":"123"
 }
 
@@ -54,7 +54,7 @@ POST http://localhost:3003/api/login/
 Content-Type: application/json
 
 {
-    "username":"user4@gmail.com",
+    "username":"user2@gmail.com",
     "password":"123"
 
 }

@@ -35,6 +35,9 @@ const errorHandler = (error, req, res, next) => {
   if (error.name === "SequelizeValidationError") {
     return res.status(400).send(error.message);
   }
+  if (error.name === "SequelizeDatabaseError") {
+    return res.status(400).send(error.message);
+  }
   if (error.name === "SyntaxError") {
     return res.status(400).send(error.message);
   }

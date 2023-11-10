@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const { DATABASE_URL } = require("./config");
+const { Umzug, SequelizeStorage } = require("umzug");
 
 //connecting to database
 const sequelize = new Sequelize(DATABASE_URL, {
@@ -11,10 +12,42 @@ const sequelize = new Sequelize(DATABASE_URL, {
   },
 });
 
+const migrationConf = {
+  migrations: {
+    glob: "migrations/*.js",
+  },
+  storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
+  context: sequelize.getQueryInterface(),
+  logger: console,
+};
+
+//sequelize keep track on changes of migration, if not change in migration, does nothing
+const runMigrations = async () => {
+  const migrator = new Umzug({
+    migrations: { glob: "migrations/*.js" },
+    storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
+    context: sequelize.getQueryInterface(),
+    logger: console,
+  });
+
+  const migrations = await migrator.up();
+  console.log("migration up to date", {
+    files: migrations.map((mig) => mig.name),
+  });
+};
+
+//for undo the database schema
+const rollbackMigration = async () => {
+  await sequelize.authenticate();
+  const migrator = new Umzug(migrationConf);
+  await migrator.down();
+};
+
 // to secure successful database connection before actual startup
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
+    await runMigrations();
     console.log("connect to database");
   } catch (err) {
     console.log("failed to connect to database");
@@ -22,4 +55,4 @@ const connectToDatabase = async () => {
   }
   return null;
 };
-module.exports = { sequelize, connectToDatabase };
+module.exports = { sequelize, rollbackMigration, connectToDatabase };

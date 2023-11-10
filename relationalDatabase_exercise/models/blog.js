@@ -27,11 +27,13 @@ Blog.init(
       defaultValue: 0,
       // validate: { isInt: true },
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,
     underscored: true,
-    timestamps: false,
+    timestamps: true, //enable timestamps(createdAt and updatedAt)
     modelName: "blog",
   }
 );
